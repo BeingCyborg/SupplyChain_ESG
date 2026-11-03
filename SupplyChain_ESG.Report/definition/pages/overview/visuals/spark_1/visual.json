@@ -37,10 +37,10 @@
                       "Entity": "Fact_Orders"
                     }
                   },
-                  "Property": "KPI Sparkline 2"
+                  "Property": "KPI Sparkline Light 2"
                 }
               },
-              "queryRef": "Fact_Orders.KPI Sparkline 2",
+              "queryRef": "Fact_Orders.KPI Sparkline Light 2",
               "displayName": " "
             }
           ]
@@ -68,7 +68,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#111E2A'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -79,7 +79,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#111E2A'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -152,7 +152,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#111E2A'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -176,7 +176,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#111E2A'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -187,7 +187,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#111E2A'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -242,7 +242,7 @@
             }
           },
           "selector": {
-            "metadata": "Fact_Orders.KPI Sparkline 2"
+            "metadata": "Fact_Orders.KPI Sparkline Light 2"
           }
         }
       ]
@@ -325,6 +325,52 @@
               }
             },
             "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "titleFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#172E45'"
+                    }
+                  }
+                }
+              }
+            },
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#172E45'"
+                    }
+                  }
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
               "expr": {
                 "Literal": {
                   "Value": "0D"

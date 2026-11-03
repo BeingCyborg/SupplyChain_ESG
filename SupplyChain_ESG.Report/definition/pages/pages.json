@@ -4,7 +4,11 @@
     "overview",
     "geography",
     "operations",
-    "supplier_tooltip"
+    "overview_dark",
+    "geography_dark",
+    "operations_dark",
+    "supplier_tooltip",
+    "supplier_tooltip_dark"
   ],
   "activePageName": "overview"
 }

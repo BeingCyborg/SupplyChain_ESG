@@ -4292,6 +4292,42 @@
                     }
                   }
                 ]
+              },
+              "fact_orders.kpi_sparkline_light_1": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Fact_Orders",
+                    "ConceptualProperty": "KPI Sparkline Light 1"
+                  }
+                },
+                "State": "Generated"
+              },
+              "fact_orders.kpi_sparkline_light_2": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Fact_Orders",
+                    "ConceptualProperty": "KPI Sparkline Light 2"
+                  }
+                },
+                "State": "Generated"
+              },
+              "fact_orders.kpi_sparkline_light_3": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Fact_Orders",
+                    "ConceptualProperty": "KPI Sparkline Light 3"
+                  }
+                },
+                "State": "Generated"
+              },
+              "fact_orders.kpi_sparkline_light_4": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Fact_Orders",
+                    "ConceptualProperty": "KPI Sparkline Light 4"
+                  }
+                },
+                "State": "Generated"
               }
             },
             "Language": "en-US",
@@ -7106,6 +7142,70 @@
             "displayFolder": "Supply Chain & ESG",
             "expression": "SELECTEDVALUE(Dim_Suppliers[SupplierName], \"Supplier overview\")",
             "lineageTag": "20c3ef76-a877-4541-9ca2-5cdb1a5eb3cf"
+          },
+          {
+            "name": "KPI Sparkline Light 1",
+            "dataCategory": "ImageUrl",
+            "displayFolder": "Trends",
+            "expression": [
+              "VAR AnchorDate = [Latest Data Date]",
+              "VAR StartDate = AnchorDate - 89",
+              "VAR Days = CALCULATETABLE(VALUES('Calendar'[Date]), DATESBETWEEN('Calendar'[Date], StartDate, AnchorDate))",
+              "VAR Points = FILTER(ADDCOLUMNS(Days, \"_Value\", CALCULATE([Total Revenue])), NOT ISBLANK([_Value]))",
+              "VAR MinValue = MINX(Points, [_Value])",
+              "VAR MaxValue = MAXX(Points, [_Value])",
+              "VAR Coordinates = CONCATENATEX(Points, FORMAT(4 + DIVIDE('Calendar'[Date] - StartDate, 89) * 264, \"0.0\", \"en-US\") & \",\" & FORMAT(28 - IF(MaxValue = MinValue, 12, DIVIDE([_Value] - MinValue, MaxValue - MinValue) * 24), \"0.0\", \"en-US\"), \" \", 'Calendar'[Date], ASC)",
+              "RETURN IF(COUNTROWS(Points) > 0, \"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='274' height='34' viewBox='0 0 274 34'><polyline fill='none' stroke='%230089A4' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' points='\" & Coordinates & \"'/></svg>\")"
+            ],
+            "lineageTag": "66fc4958-75a8-41fc-ba09-cdf096b5bc10"
+          },
+          {
+            "name": "KPI Sparkline Light 2",
+            "dataCategory": "ImageUrl",
+            "displayFolder": "Trends",
+            "expression": [
+              "VAR AnchorDate = [Latest Data Date]",
+              "VAR StartDate = AnchorDate - 89",
+              "VAR Days = CALCULATETABLE(VALUES('Calendar'[Date]), DATESBETWEEN('Calendar'[Date], StartDate, AnchorDate))",
+              "VAR Points = FILTER(ADDCOLUMNS(Days, \"_Value\", CALCULATE([Avg ESG Score])), NOT ISBLANK([_Value]))",
+              "VAR MinValue = MINX(Points, [_Value])",
+              "VAR MaxValue = MAXX(Points, [_Value])",
+              "VAR Coordinates = CONCATENATEX(Points, FORMAT(4 + DIVIDE('Calendar'[Date] - StartDate, 89) * 264, \"0.0\", \"en-US\") & \",\" & FORMAT(28 - IF(MaxValue = MinValue, 12, DIVIDE([_Value] - MinValue, MaxValue - MinValue) * 24), \"0.0\", \"en-US\"), \" \", 'Calendar'[Date], ASC)",
+              "RETURN IF(COUNTROWS(Points) > 0, \"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='274' height='34' viewBox='0 0 274 34'><polyline fill='none' stroke='%23208B3C' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' points='\" & Coordinates & \"'/></svg>\")"
+            ],
+            "lineageTag": "17c81d2b-0362-4afc-a6cc-af3a503cbbda"
+          },
+          {
+            "name": "KPI Sparkline Light 3",
+            "dataCategory": "ImageUrl",
+            "displayFolder": "Trends",
+            "expression": [
+              "VAR AnchorDate = [Latest Data Date]",
+              "VAR StartDate = AnchorDate - 89",
+              "VAR Days = CALCULATETABLE(VALUES('Calendar'[Date]), DATESBETWEEN('Calendar'[Date], StartDate, AnchorDate))",
+              "VAR Points = FILTER(ADDCOLUMNS(Days, \"_Value\", CALCULATE([Carbon Footprint t])), NOT ISBLANK([_Value]))",
+              "VAR MinValue = MINX(Points, [_Value])",
+              "VAR MaxValue = MAXX(Points, [_Value])",
+              "VAR Coordinates = CONCATENATEX(Points, FORMAT(4 + DIVIDE('Calendar'[Date] - StartDate, 89) * 264, \"0.0\", \"en-US\") & \",\" & FORMAT(28 - IF(MaxValue = MinValue, 12, DIVIDE([_Value] - MinValue, MaxValue - MinValue) * 24), \"0.0\", \"en-US\"), \" \", 'Calendar'[Date], ASC)",
+              "RETURN IF(COUNTROWS(Points) > 0, \"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='274' height='34' viewBox='0 0 274 34'><polyline fill='none' stroke='%230089A4' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' points='\" & Coordinates & \"'/></svg>\")"
+            ],
+            "lineageTag": "81434362-a42e-4381-9160-8cb0cd7d75ca"
+          },
+          {
+            "name": "KPI Sparkline Light 4",
+            "dataCategory": "ImageUrl",
+            "displayFolder": "Trends",
+            "expression": [
+              "VAR AnchorDate = [Latest Data Date]",
+              "VAR StartDate = AnchorDate - 89",
+              "VAR Days = CALCULATETABLE(VALUES('Calendar'[Date]), DATESBETWEEN('Calendar'[Date], StartDate, AnchorDate))",
+              "VAR Points = FILTER(ADDCOLUMNS(Days, \"_Value\", CALCULATE([Critical Risk Suppliers])), NOT ISBLANK([_Value]))",
+              "VAR MinValue = MINX(Points, [_Value])",
+              "VAR MaxValue = MAXX(Points, [_Value])",
+              "VAR Coordinates = CONCATENATEX(Points, FORMAT(4 + DIVIDE('Calendar'[Date] - StartDate, 89) * 264, \"0.0\", \"en-US\") & \",\" & FORMAT(28 - IF(MaxValue = MinValue, 12, DIVIDE([_Value] - MinValue, MaxValue - MinValue) * 24), \"0.0\", \"en-US\"), \" \", 'Calendar'[Date], ASC)",
+              "RETURN IF(COUNTROWS(Points) > 0, \"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='274' height='34' viewBox='0 0 274 34'><polyline fill='none' stroke='%23CC2863' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' points='\" & Coordinates & \"'/></svg>\")"
+            ],
+            "lineageTag": "0853f6ea-8e6c-4385-952a-8b417b7dc0cf"
           }
         ],
         "partitions": [

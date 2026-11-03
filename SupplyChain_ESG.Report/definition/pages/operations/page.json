@@ -14,7 +14,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#0A0E17'"
+                    "Value": "'#F2F6FA'"
                   }
                 }
               }
@@ -25,7 +25,7 @@
               "name": {
                 "expr": {
                   "Literal": {
-                    "Value": "'operations.png'"
+                    "Value": "'operations_light.png'"
                   }
                 }
               },
@@ -34,7 +34,7 @@
                   "ResourcePackageItem": {
                     "PackageName": "RegisteredResources",
                     "PackageType": 1,
-                    "ItemName": "operations.png"
+                    "ItemName": "operations_light.png"
                   }
                 }
               },
@@ -65,7 +65,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#0A0E17'"
+                    "Value": "'#F2F6FA'"
                   }
                 }
               }

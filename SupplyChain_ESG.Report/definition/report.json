@@ -11,7 +11,7 @@
       "type": "SharedResources"
     },
     "customTheme": {
-      "name": "NexusObsidian.json",
+      "name": "NexusDaylight.json",
       "reportVersionAtImport": {
         "visual": "1.8.91",
         "report": "2.0.91",
@@ -26,18 +26,33 @@
       "type": "RegisteredResources",
       "items": [
         {
+          "name": "geography_light.png",
+          "path": "geography_light.png",
+          "type": "Image"
+        },
+        {
           "name": "geography.png",
           "path": "geography.png",
           "type": "Image"
         },
         {
-          "name": "NexusObsidian.json",
-          "path": "NexusObsidian.json",
+          "name": "NexusDaylight.json",
+          "path": "NexusDaylight.json",
           "type": "CustomTheme"
+        },
+        {
+          "name": "operations_light.png",
+          "path": "operations_light.png",
+          "type": "Image"
         },
         {
           "name": "operations.png",
           "path": "operations.png",
+          "type": "Image"
+        },
+        {
+          "name": "overview_light.png",
+          "path": "overview_light.png",
           "type": "Image"
         },
         {

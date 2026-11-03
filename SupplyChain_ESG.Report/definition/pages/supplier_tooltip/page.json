@@ -6,7 +6,7 @@
   "height": 300,
   "width": 460,
   "pageBinding": {
-    "name": "SupplierHistoryTooltip",
+    "name": "SupplierHistoryTooltipLight",
     "type": "Tooltip",
     "parameters": []
   },
@@ -19,7 +19,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#111E2A'"
+                    "Value": "'#FFFFFF'"
                   }
                 }
               }
@@ -48,7 +48,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#0A0E17'"
+                    "Value": "'#F2F6FA'"
                   }
                 }
               }
