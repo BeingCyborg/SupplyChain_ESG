@@ -1,0 +1,114 @@
+Total Revenue =
+SUMX(Fact_Orders, Fact_Orders[Quantity] * RELATED(Dim_Products[SalePrice]))
+
+Total Cost =
+SUMX(Fact_Orders, Fact_Orders[Quantity] * RELATED(Dim_Products[UnitCost]))
+
+Gross Profit =
+[Total Revenue] - [Total Cost]
+
+Gross Margin =
+DIVIDE([Gross Profit], [Total Revenue])
+
+Total Quantity =
+SUM(Fact_Orders[Quantity])
+
+Order Count =
+COUNTROWS(Fact_Orders)
+
+Active Suppliers =
+DISTINCTCOUNT(Fact_Orders[SupplierID])
+
+Avg ESG Score =
+VAR IDs = VALUES(Fact_Orders[SupplierID]) RETURN CALCULATE(AVERAGE(Dim_Suppliers[ESG_Score]), TREATAS(IDs, Dim_Suppliers[SupplierID]))
+
+Carbon Footprint kg =
+SUMX(Fact_Orders, Fact_Orders[Quantity] * RELATED(Dim_Products[Carbon_Footprint_kg]))
+
+Carbon Footprint t =
+DIVIDE([Carbon Footprint kg], 1000)
+
+Critical Risk Suppliers =
+CALCULATE(DISTINCTCOUNT(Fact_Orders[SupplierID]), KEEPFILTERS(Dim_Suppliers[Risk_Rating] = "Critical")) + 0
+
+High Risk Suppliers =
+CALCULATE(DISTINCTCOUNT(Fact_Orders[SupplierID]), KEEPFILTERS(Dim_Suppliers[Risk_Rating] = "High")) + 0
+
+Avg Shipping Delay =
+AVERAGE(Fact_Orders[ShippingDelay_Days])
+
+Estimated Defective Units =
+SUMX(Fact_Orders, Fact_Orders[Quantity] * Fact_Orders[DefectRate_Pct])
+
+Weighted Defect Rate =
+DIVIDE([Estimated Defective Units], [Total Quantity])
+
+Supplier Defect Rank =
+VAR CurrentRate = [Weighted Defect Rate] VAR CurrentID = SELECTEDVALUE(Dim_Suppliers[SupplierID]) RETURN IF(NOT ISBLANK(CurrentRate), 1 + COUNTROWS(FILTER(ALLSELECTED(Dim_Suppliers), [Weighted Defect Rate] > CurrentRate || ([Weighted Defect Rate] = CurrentRate && Dim_Suppliers[SupplierID] < CurrentID))))
+
+ESG Score =
+AVERAGE(Dim_Suppliers[ESG_Score])
+
+Latest Data Date =
+CALCULATE(MAX(Fact_Orders[OrderDate]), REMOVEFILTERS())
+
+Revenue 90D =
+VAR AnchorDate = [Latest Data Date] RETURN IF(MAX(Calendar[Date]) > AnchorDate - 90 && MIN(Calendar[Date]) <= AnchorDate, [Total Revenue])
+
+ESG 90D =
+VAR AnchorDate = [Latest Data Date] RETURN IF(MAX(Calendar[Date]) > AnchorDate - 90 && MIN(Calendar[Date]) <= AnchorDate, [Avg ESG Score])
+
+Carbon 90D =
+VAR AnchorDate = [Latest Data Date] RETURN IF(MAX(Calendar[Date]) > AnchorDate - 90 && MIN(Calendar[Date]) <= AnchorDate, [Carbon Footprint t])
+
+Critical 90D =
+VAR AnchorDate = [Latest Data Date] RETURN IF(MAX(Calendar[Date]) > AnchorDate - 90 && MIN(Calendar[Date]) <= AnchorDate, [Critical Risk Suppliers])
+
+Defect History 12M =
+VAR AnchorDate = [Latest Data Date] RETURN IF(MAX(Calendar[Date]) > EDATE(AnchorDate, -12) && MIN(Calendar[Date]) <= AnchorDate, [Weighted Defect Rate])
+
+Risk Color =
+SWITCH(SELECTEDVALUE(Dim_Suppliers[Risk_Rating]), "Critical", "#FF4081", "High", "#FF879E", "Medium", "#00E5FF", "#39FF14")
+
+KPI Sparkline 1 =
+VAR AnchorDate = [Latest Data Date]
+VAR StartDate = AnchorDate - 89
+VAR Days = CALCULATETABLE(VALUES('Calendar'[Date]), DATESBETWEEN('Calendar'[Date], StartDate, AnchorDate))
+VAR Points = FILTER(ADDCOLUMNS(Days, "_Value", CALCULATE([Total Revenue])), NOT ISBLANK([_Value]))
+VAR MinValue = MINX(Points, [_Value])
+VAR MaxValue = MAXX(Points, [_Value])
+VAR Coordinates = CONCATENATEX(Points, FORMAT(4 + DIVIDE('Calendar'[Date] - StartDate, 89) * 264, "0.0", "en-US") & "," & FORMAT(28 - IF(MaxValue = MinValue, 12, DIVIDE([_Value] - MinValue, MaxValue - MinValue) * 24), "0.0", "en-US"), " ", 'Calendar'[Date], ASC)
+RETURN IF(COUNTROWS(Points) > 0, "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='274' height='34' viewBox='0 0 274 34'><polyline fill='none' stroke='%2300E5FF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' points='" & Coordinates & "'/></svg>")
+
+KPI Sparkline 2 =
+VAR AnchorDate = [Latest Data Date]
+VAR StartDate = AnchorDate - 89
+VAR Days = CALCULATETABLE(VALUES('Calendar'[Date]), DATESBETWEEN('Calendar'[Date], StartDate, AnchorDate))
+VAR Points = FILTER(ADDCOLUMNS(Days, "_Value", CALCULATE([Avg ESG Score])), NOT ISBLANK([_Value]))
+VAR MinValue = MINX(Points, [_Value])
+VAR MaxValue = MAXX(Points, [_Value])
+VAR Coordinates = CONCATENATEX(Points, FORMAT(4 + DIVIDE('Calendar'[Date] - StartDate, 89) * 264, "0.0", "en-US") & "," & FORMAT(28 - IF(MaxValue = MinValue, 12, DIVIDE([_Value] - MinValue, MaxValue - MinValue) * 24), "0.0", "en-US"), " ", 'Calendar'[Date], ASC)
+RETURN IF(COUNTROWS(Points) > 0, "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='274' height='34' viewBox='0 0 274 34'><polyline fill='none' stroke='%2339FF14' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' points='" & Coordinates & "'/></svg>")
+
+KPI Sparkline 3 =
+VAR AnchorDate = [Latest Data Date]
+VAR StartDate = AnchorDate - 89
+VAR Days = CALCULATETABLE(VALUES('Calendar'[Date]), DATESBETWEEN('Calendar'[Date], StartDate, AnchorDate))
+VAR Points = FILTER(ADDCOLUMNS(Days, "_Value", CALCULATE([Carbon Footprint t])), NOT ISBLANK([_Value]))
+VAR MinValue = MINX(Points, [_Value])
+VAR MaxValue = MAXX(Points, [_Value])
+VAR Coordinates = CONCATENATEX(Points, FORMAT(4 + DIVIDE('Calendar'[Date] - StartDate, 89) * 264, "0.0", "en-US") & "," & FORMAT(28 - IF(MaxValue = MinValue, 12, DIVIDE([_Value] - MinValue, MaxValue - MinValue) * 24), "0.0", "en-US"), " ", 'Calendar'[Date], ASC)
+RETURN IF(COUNTROWS(Points) > 0, "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='274' height='34' viewBox='0 0 274 34'><polyline fill='none' stroke='%2300E5FF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' points='" & Coordinates & "'/></svg>")
+
+KPI Sparkline 4 =
+VAR AnchorDate = [Latest Data Date]
+VAR StartDate = AnchorDate - 89
+VAR Days = CALCULATETABLE(VALUES('Calendar'[Date]), DATESBETWEEN('Calendar'[Date], StartDate, AnchorDate))
+VAR Points = FILTER(ADDCOLUMNS(Days, "_Value", CALCULATE([Critical Risk Suppliers])), NOT ISBLANK([_Value]))
+VAR MinValue = MINX(Points, [_Value])
+VAR MaxValue = MAXX(Points, [_Value])
+VAR Coordinates = CONCATENATEX(Points, FORMAT(4 + DIVIDE('Calendar'[Date] - StartDate, 89) * 264, "0.0", "en-US") & "," & FORMAT(28 - IF(MaxValue = MinValue, 12, DIVIDE([_Value] - MinValue, MaxValue - MinValue) * 24), "0.0", "en-US"), " ", 'Calendar'[Date], ASC)
+RETURN IF(COUNTROWS(Points) > 0, "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='274' height='34' viewBox='0 0 274 34'><polyline fill='none' stroke='%23FF4081' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' points='" & Coordinates & "'/></svg>")
+
+Supplier Label =
+SELECTEDVALUE(Dim_Suppliers[SupplierName], "Supplier overview")

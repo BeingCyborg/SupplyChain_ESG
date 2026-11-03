@@ -1,0 +1,91 @@
+{
+  "name": "Nexus Obsidian",
+  "dataColors": [
+    "#00E5FF",
+    "#39FF14",
+    "#FF4081",
+    "#A78BFA",
+    "#F5BC66",
+    "#56B4D3"
+  ],
+  "background": "#0A0E17",
+  "foreground": "#FFFFFF",
+  "tableAccent": "#00E5FF",
+  "good": "#39FF14",
+  "neutral": "#00E5FF",
+  "bad": "#FF4081",
+  "textClasses": {
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#94A3B8"
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 14,
+      "color": "#FFFFFF"
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 30,
+      "color": "#FFFFFF"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "title": [
+          {
+            "show": false
+          }
+        ],
+        "visualHeader": [
+          {
+            "show": false
+          }
+        ],
+        "categoryAxis": [
+          {
+            "labelColor": {
+              "solid": {
+                "color": "#94A3B8"
+              }
+            },
+            "showAxisTitle": false,
+            "gridlineShow": false
+          }
+        ],
+        "valueAxis": [
+          {
+            "labelColor": {
+              "solid": {
+                "color": "#94A3B8"
+              }
+            },
+            "showAxisTitle": false,
+            "gridlineColor": {
+              "solid": {
+                "color": "#263847"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "labelColor": {
+              "solid": {
+                "color": "#B4C3D4"
+              }
+            },
+            "titleText": ""
+          }
+        ]
+      }
+    }
+  }
+}

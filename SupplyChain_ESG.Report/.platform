@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "SupplyChain_ESG"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "91eafabb-e241-47a6-9bd6-380e98a5c700"
+  }
+}
