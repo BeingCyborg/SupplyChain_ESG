@@ -1,4 +1,7 @@
 # Supply Chain & ESG analytics
+<p align="center">
+  <img src="Video.webp" width="100%" alt="Supply Chain ESG Demo">
+</p>
 
 An interactive Power BI dashboard that combines supply chain performance and environmental, social, and governance insights. Built from an Excel dataset containing 75,000 orders, 150 suppliers, and 800 products, it helps users monitor revenue, supplier ESG scores, carbon footprints, delivery delays, and defect rates.
 
