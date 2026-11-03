@@ -1,6 +1,6 @@
 # Supply Chain & ESG analytics
 
-Open **SupplyChain_ESG.pbip** in Power BI Desktop. Keep the Report, SemanticModel, and Data folders together. If data is not yet loaded, click **Refresh**. The source workbook is copied under Data; the original file is unchanged.
+An interactive Power BI dashboard that combines supply chain performance and environmental, social, and governance insights. Built from an Excel dataset containing 75,000 orders, 150 suppliers, and 800 products, it helps users monitor revenue, supplier ESG scores, carbon footprints, delivery delays, and defect rates.
 
 ## Report pages
 
@@ -22,10 +22,6 @@ Use Year, Country, and Risk dropdowns to filter each page. Select points or bars
 - Worst suppliers = descending weighted defect rate; supplier ID breaks ties, giving ten rows when at least ten suppliers are in scope.
 - KPI sparklines use the 90 days ending at the latest date in the entire source dataset (31 October 2026). Filters can reduce the displayed history; filters outside this window yield no sparkline data.
 - Supplier tooltip uses the latest 12 months ending at the same data date.
-
-## Design implementation
-
-16:9 native Power BI report with a static high-resolution aurora background, glass-style panels, cyan/emerald/coral accents, and native interactive charts, cards, slicers, and navigation. Dynamic SVG measures provide 90-day micro-sparklines. The offline map uses approximate country markers and remains full-dataset coverage when other visuals are filtered. Sidebar navigation uses transparent native page buttons. The implementation does not include a looping MP4/GIF background, CSS blur, timed lift transitions, chart-entry animations, or tooltip fade transitions. These are not represented as implemented features.
 
 ## Refresh and portability
 
